@@ -1,13 +1,7 @@
 const BUTTON_ID = "slack-thread-copier-btn";
 
-function injectCopyButton(panelNode) {
+function _doInject(panelNode, closeBtn) {
   if (panelNode.querySelector("#" + BUTTON_ID)) return;
-
-  const header = panelNode.querySelector(".p-flexpane_header");
-  if (!header) return;
-
-  const closeBtn = header.querySelector('[data-qa="close_flexpane"]');
-  if (!closeBtn) return;
 
   const button = document.createElement("button");
   button.id = BUTTON_ID;
@@ -20,7 +14,24 @@ function injectCopyButton(panelNode) {
     console.log("Copy clicked");
   });
 
-  header.insertBefore(button, closeBtn);
+  closeBtn.parentNode.insertBefore(button, closeBtn);
+}
+
+function injectCopyButton(panelNode) {
+  const closeBtn = panelNode.querySelector('[data-qa="close_flexpane"]');
+  if (closeBtn) {
+    _doInject(panelNode, closeBtn);
+    return;
+  }
+
+  const observer = new MutationObserver(() => {
+    const closeBtn = panelNode.querySelector('[data-qa="close_flexpane"]');
+    if (closeBtn) {
+      observer.disconnect();
+      _doInject(panelNode, closeBtn);
+    }
+  });
+  observer.observe(panelNode, { childList: true, subtree: true });
 }
 
 function removeCopyButton() {
