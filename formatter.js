@@ -1,6 +1,6 @@
 function format(messages) {
   return messages
-    .map(({ username, timestamp, content }) => `**@${username}** (${timestamp}):\n${content}`)
+    .map(({ author, timestamp, content }) => `**@${author}** (${timestamp}):\n${content}`)
     .join("\n\n");
 }
 
