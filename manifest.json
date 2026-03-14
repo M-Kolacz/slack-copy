@@ -5,7 +5,7 @@
   "content_scripts": [
     {
       "matches": ["https://app.slack.com/*"],
-      "js": ["extractor.js", "content.js"]
+      "js": ["extractor.js", "detector.js", "injector.js", "content.js"]
     }
   ]
 }
