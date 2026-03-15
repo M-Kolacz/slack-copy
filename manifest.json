@@ -1,7 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Slack Thread Copier",
-  "version": "0.1.0",
+  "name": "Threaddy",
+  "description": "Copy Slack threads to your clipboard with one click.",
+  "version": "1.0.0",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
